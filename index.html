@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dog Shelter Adoption Center</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  transition: 0.3s ease;
+}
+
+body {
+  background: #f9fafb;
+  color: #333;
+}
+
+/* DARK MODE */
+.dark {
+  background: #1e1e1e;
+  color: #eee;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+}
+
+/* NAVBAR */
+nav {
+  background: white;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 600;
+}
+
+nav a.active {
+  color: #ff6f6f;
+}
+
+/* DARK BUTTON */
+.toggle-btn {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  cursor: pointer;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+/* CARDS */
+.box {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+  /* animation initial state */
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* SHOW ON SCROLL */
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CTA BUTTON */
+.cta a {
+  display: inline-block;
+  background: #ff6f6f;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+.cta a:hover {
+  transform: scale(1.05);
+}
+
+/* COUNTER */
+.counter {
+  font-size: 2rem;
+  color: #ff6f6f;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #2d2d2d;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🐾 Dog Shelter Adoption Center</h1>
+  <p>Every dog deserves love ❤️</p>
+</header>
+
+<nav>
+  <a href="index.html" class="active">Home</a>
+  <a href="dogs.html">Dogs</a>
+  <a href="services.html">Services</a>
+  <a href="stories.html">Stories</a>
+<a href="careers.html">Careers</a>
+<a href="adoption.html">Adoption</a>
+  <span class="toggle-btn" onclick="toggleDarkMode()">🌙</span>
+</nav>
+
+<div class="container">
+
+  <div class="box">
+    <h2>Welcome</h2>
+    <p>We rescue and rehome dogs with love and care.</p>
+  </div>
+
+  <div class="box">
+    <h2>Dogs Adopted</h2>
+    <div class="counter" id="counter">0</div>
+  </div>
+
+  <div class="box">
+    <h2>What We Do</h2>
+    <p>Adoption, volunteering, fostering and more.</p>
+
+    <div class="cta">
+      <a href="services.html">Explore Services</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Dog Shelter</p>
+</footer>
+
+<script>
+
+/* DARK MODE */
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+
+/* SCROLL + LOAD ANIMATION FIX */
+const boxes = document.querySelectorAll('.box');
+
+function reveal() {
+  boxes.forEach(box => {
+    const boxTop = box.getBoundingClientRect().top;
+    if (boxTop < window.innerHeight - 50) {
+      box.classList.add('show');
+    }
+  });
+}
+
+/* IMPORTANT: both events */
+window.addEventListener('scroll', reveal);
+window.addEventListener('load', reveal);
+
+/* COUNTER ANIMATION */
+let count = 0;
+let target = 120;
+
+let counter = document.getElementById("counter");
+
+let interval = setInterval(() => {
+  count++;
+  counter.innerText = count;
+  if (count >= target) clearInterval(interval);
+}, 20);
+
+</script>
+
+</body>
+</html>

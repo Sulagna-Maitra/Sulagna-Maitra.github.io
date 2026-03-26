@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Adoption Stories</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f9fafb;
+    margin: 0;
+    color: #333;
+    transition: 0.3s;
+}
+
+/* DARK MODE */
+.dark {
+    background: #1e1e1e;
+    color: #eee;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    padding: 50px;
+    text-align: center;
+}
+
+/* NAV */
+nav {
+    background: white;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+}
+
+.toggle-btn {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* STORY GRID */
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.story-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.story-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* IMAGE HOVER */
+.story-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.story-card:hover img {
+    transform: scale(1.1);
+}
+
+.content {
+    padding: 25px;
+}
+
+.content h3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* LIKE BUTTON */
+.like-btn {
+    cursor: pointer;
+}
+
+/* MESSAGE */
+.message {
+    background: white;
+    margin-top: 70px;
+    padding: 45px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.message span {
+    color: #e26a6a;
+    font-weight: bold;
+}
+
+/* BUTTON */
+.adopt-btn {
+    margin-top: 25px;
+    background: #ff7a7a;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.adopt-btn:hover {
+    transform: scale(1.05);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #2d2d2d;
+    color: #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🐾 Stories That Found a Home</h1>
+    <p>From shelter floors to sofa cuddles — these lives changed forever</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="dogs.html">Our Dogs</a>
+    <a href="services.html">Services</a>
+    <a href="stories.html">Adoption Stories</a>
+    <span class="toggle-btn" onclick="toggleDarkMode()">🌙</span>
+</nav>
+
+<div class="container">
+
+    <!-- STORIES -->
+    <div class="story-grid">
+
+        <div class="story-card">
+            <img src="images/story1.jpg">
+            <div class="content">
+                <h3>Bruno & Aarav <span class="like-btn">🤍</span></h3>
+                <p>
+                    Bruno was found injured on the streets. Today, he sleeps on Aarav’s bed,
+                    waits by the door every evening, and reminds us that love heals everything.
+                </p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <img src="images/story2.jpg">
+            <div class="content">
+                <h3>Luna’s Second Chance <span class="like-btn">🤍</span></h3>
+                <p>
+                    Once abandoned, Luna now enjoys morning walks, warm meals,
+                    and endless belly rubs. All she needed was someone to choose her.
+                </p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <img src="images/story3.jpg">
+            <div class="content">
+                <h3>Max Found His Family <span class="like-btn">🤍</span></h3>
+                <p>
+                    Max didn’t come from a store. He came from a shelter —
+                    and brought loyalty, laughter, and unconditional love with him.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MESSAGE -->
+    <div class="message">
+        <h2>Adopt. Don’t Shop. ❤️</h2>
+        <p>
+            Every year, thousands of dogs wait behind shelter doors —
+            not because they are unwanted, but because they were forgotten.
+        </p>
+        <p>
+            When you <span>adopt</span>, you don’t just bring home a pet.
+            You save a life.
+        </p>
+
+        <button class="adopt-btn" onclick="window.location.href='services.html'">
+            Start Your Adoption Journey
+        </button>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Dog Shelter Adoption Center | Because every dog deserves a home</p>
+</footer>
+
+<script>
+
+/* DARK MODE */
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+
+/* LIKE BUTTON */
+document.querySelectorAll(".like-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+        this.textContent = this.textContent === "🤍" ? "❤️" : "🤍";
+    });
+});
+
+/* SCROLL ANIMATION */
+const elements = document.querySelectorAll('.story-card, .message');
+
+function reveal() {
+    elements.forEach(el => {
+        let top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 50) {
+            el.classList.add("show");
+        }
+    });
+}
+
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
+
+</script>
+
+</body>
+</html>

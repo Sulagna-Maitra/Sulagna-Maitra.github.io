@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Our Team - Dog Shelter</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #fef6e4;
+    transition: 0.3s;
+}
+
+/* DARK MODE */
+.dark {
+    background: #1e1e1e;
+    color: #eee;
+}
+
+/* HEADER */
+header {
+    background-color: #ff914d;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+/* NAVBAR */
+nav {
+    background: white;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+}
+
+.toggle-btn {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+/* SECTION */
+section {
+    padding: 40px;
+    text-align: center;
+}
+
+/* JOB CARDS */
+.job-card {
+    background: white;
+    margin: 20px auto;
+    padding: 25px;
+    width: 70%;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.job-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.job-card:hover {
+    transform: scale(1.03);
+}
+
+/* BUTTON */
+button {
+    background-color: #ff914d;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin-top: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e76f2f;
+}
+
+/* POPUP */
+.popup {
+    display: none;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #2d2d2d;
+    color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>🐶 We're Hiring!</h1>
+    <p>Join our mission to give every dog a loving home</p>
+</header>
+
+<!-- FULL NAVBAR -->
+<nav>
+    <a href="index.html">Home</a>
+    <a href="dogs.html">Our Dogs</a>
+    <a href="services.html">Services</a>
+    <a href="stories.html">Stories</a>
+    <a href="careers.html">Careers</a>
+    <span class="toggle-btn" onclick="toggleDarkMode()">🌙</span>
+</nav>
+
+<section>
+
+<div class="job-card">
+    <h2>🐾 Shelter Care Assistant</h2>
+    <p>Help feed, clean, and care for rescued dogs. Full-time position.</p>
+    <p><strong>Requirements:</strong> Love for animals, patience, teamwork skills.</p>
+    <button onclick="applyNow()">Apply Now</button>
+</div>
+
+<div class="job-card">
+    <h2>🐾 Veterinary Assistant</h2>
+    <p>Assist our vet in medical checkups and treatments.</p>
+    <p><strong>Requirements:</strong> Basic medical knowledge preferred.</p>
+    <button onclick="applyNow()">Apply Now</button>
+</div>
+
+<div class="job-card">
+    <h2>🐾 Adoption Coordinator</h2>
+    <p>Help families find their perfect furry companion.</p>
+    <p><strong>Requirements:</strong> Good communication and organizational skills.</p>
+    <button onclick="applyNow()">Apply Now</button>
+</div>
+
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+    <h2>Application Submitted 🐶❤️</h2>
+    <p>We’ll contact you soon!</p>
+    <button onclick="closePopup()">Close</button>
+</div>
+
+<footer>
+    <p>© 2026 Dog Shelter Adoption Center</p>
+</footer>
+
+<script>
+
+/* DARK MODE */
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+
+/* APPLY BUTTON */
+function applyNow() {
+    document.getElementById("popup").style.display = "block";
+}
+
+/* CLOSE POPUP */
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+/* SCROLL ANIMATION */
+const cards = document.querySelectorAll('.job-card');
+
+function reveal() {
+    cards.forEach(card => {
+        let top = card.getBoundingClientRect().top;
+        if (top < window.innerHeight - 50) {
+            card.classList.add("show");
+        }
+    });
+}
+
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
+
+</script>
+
+</body>
+</html>

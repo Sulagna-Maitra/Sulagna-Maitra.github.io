@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adoption Form</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #444;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    nav a:hover {
+      background: #fcb69f;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .form-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #ff8c5a;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 25px;
+      background: #ff8c5a;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e67645;
+    }
+
+    footer {
+      background: #2d2d2d;
+      color: #ddd;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #ffecd2;
+      text-decoration: none;
+    }
+
+    /* THANK YOU MESSAGE */
+    .thank-you {
+      display: none;
+      text-align: center;
+      margin-top: 40px;
+      animation: fadeIn 1s ease;
+    }
+
+    .thank-you img {
+      width: 200px;
+      margin-top: 15px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🐾 Adoption Application Form</h1>
+  <p>Help us find the perfect match for you and your future dog!</p>
+</header>
+
+<!-- 🔗 LINKED NAVBAR -->
+<nav>
+  <a href="index.html">Home</a>
+  <a href="dogs.html">Our Dogs</a>
+  <a href="services.html">Services</a>
+  <a href="join.html">Join Team</a>
+</nav>
+
+<div class="container">
+
+  <div class="form-card">
+    <h2>Applicant Details</h2>
+
+    <form id="adoptionForm">
+      <label>Full Name</label>
+      <input type="text" required>
+
+      <label>Email</label>
+      <input type="email" required>
+
+      <label>Phone</label>
+      <input type="tel" required>
+
+      <label>Address</label>
+      <textarea rows="3" required></textarea>
+
+      <label>Residence Type</label>
+      <select required>
+        <option>Apartment</option>
+        <option>Independent House</option>
+      </select>
+
+      <label>Own or Rent?</label>
+      <select required>
+        <option>Own</option>
+        <option>Rent</option>
+      </select>
+
+      <label>Preferred Dog</label>
+      <select>
+        <option>No Preference</option>
+        <option>Buddy</option>
+        <option>Luna</option>
+        <option>Max</option>
+      </select>
+
+      <label>Pet Experience</label>
+      <select required>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+
+      <label>Why do you want to adopt?</label>
+      <textarea rows="4" required></textarea>
+
+      <label>
+        <input type="checkbox" required>
+        I agree to follow-up checks
+      </label>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- THANK YOU MESSAGE -->
+  <div id="thankYou" class="thank-you">
+    <h2>🎉 Thank you for applying!</h2>
+    <p>We will contact you soon 🐶</p>
+    <img src="images/dogx.gif" alt="Dog animation">
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="index.html">← Back to Home</a></p>
+  <p>© 2026 Dog Shelter</p>
+</footer>
+
+<!-- ✅ FIXED SCRIPT -->
+<script>
+  const form = document.getElementById("adoptionForm");
+  const thankYou = document.getElementById("thankYou");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    form.style.display = "none";
+    thankYou.style.display = "block";
+  });
+</script>
+
+</body>
+</html>

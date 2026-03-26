@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Dogs</title>
+
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f9fafb;
+  margin: 0;
+  color: #333;
+  transition: 0.3s;
+}
+
+/* DARK MODE */
+.dark {
+  background: #1e1e1e;
+  color: #eee;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* NAV */
+nav {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 600;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+/* SEARCH */
+.search-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* GRID */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.dog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
+}
+
+/* CARD */
+.dog-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.dog-card.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dog-card:hover {
+  transform: scale(1.03);
+}
+
+.dog-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.info {
+  padding: 18px;
+}
+
+.info h3 {
+  color: #6f8efc;
+}
+
+/* FAVORITE */
+.fav-btn {
+  cursor: pointer;
+  font-size: 18px;
+  float: right;
+}
+
+/* FOOTER */
+footer {
+  background: #2d2d2d;
+  color: #ddd;
+  text-align: center;
+  padding: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🐶 Meet Our Dogs</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="adoption.html">Forms</a>
+  <span class="toggle-btn" onclick="toggleDarkMode()">🌙</span>
+</nav>
+
+<div class="container">
+
+  <!-- SEARCH -->
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search dogs...">
+  </div>
+
+  <div class="dog-grid" id="dogGrid">
+
+    <div class="dog-card">
+      <img src="images/buddy.jpg">
+      <div class="info">
+        <h3>Buddy <span class="fav-btn">🤍</span></h3>
+        <p>Friendly, playful, and loves children. Perfect family dog.</p>
+      </div>
+    </div>
+
+    <div class="dog-card">
+      <img src="images/luna.jpg">
+      <div class="info">
+        <h3>Luna <span class="fav-btn">🤍</span></h3>
+        <p>Calm, quiet, and ideal for apartment living.</p>
+      </div>
+    </div>
+
+    <div class="dog-card">
+      <img src="images/max.jpg">
+      <div class="info">
+        <h3>Max <span class="fav-btn">🤍</span></h3>
+        <p>Energetic and adventurous. Loves outdoor activities.</p>
+      </div>
+    </div>
+
+    <div class="dog-card">
+      <img src="images/misty.jpg">
+      <div class="info">
+        <h3>Misty <span class="fav-btn">🤍</span></h3>
+        <p>Cancer survivor with a gentle heart and lots of love.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p><a href="index.html">← Back to Home</a></p>
+  <p>© 2026 Dog Shelter Adoption Center</p>
+</footer>
+
+<script>
+
+/* DARK MODE */
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+
+/* SEARCH FILTER */
+document.getElementById("search").addEventListener("keyup", function() {
+  let value = this.value.toLowerCase();
+  let cards = document.querySelectorAll(".dog-card");
+
+  cards.forEach(card => {
+    let name = card.innerText.toLowerCase();
+    card.style.display = name.includes(value) ? "block" : "none";
+  });
+});
+
+/* FAVORITES (LOCAL STORAGE) */
+document.querySelectorAll(".fav-btn").forEach(btn => {
+  btn.addEventListener("click", function() {
+    this.textContent = this.textContent === "🤍" ? "❤️" : "🤍";
+  });
+});
+
+/* SCROLL ANIMATION */
+const cards = document.querySelectorAll('.dog-card');
+
+function reveal() {
+  cards.forEach(card => {
+    let top = card.getBoundingClientRect().top;
+    if (top < window.innerHeight - 50) {
+      card.classList.add("show");
+    }
+  });
+}
+
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
+
+</script>
+
+</body>
+</html>
