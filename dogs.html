@@ -14,20 +14,17 @@ body {
   transition: 0.3s;
 }
 
-/* DARK MODE */
 .dark {
   background: #1e1e1e;
   color: #eee;
 }
 
-/* HEADER */
 header {
   background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
   padding: 40px 20px;
   text-align: center;
 }
 
-/* NAV */
 nav {
   background: #fff;
   display: flex;
@@ -50,7 +47,6 @@ nav a {
   cursor: pointer;
 }
 
-/* SEARCH */
 .search-box {
   text-align: center;
   margin-bottom: 20px;
@@ -63,7 +59,6 @@ nav a {
   border: 1px solid #ccc;
 }
 
-/* GRID */
 .container {
   max-width: 1100px;
   margin: 40px auto;
@@ -76,7 +71,6 @@ nav a {
   gap: 25px;
 }
 
-/* CARD */
 .dog-card {
   background: #fff;
   border-radius: 18px;
@@ -84,15 +78,12 @@ nav a {
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   transform: translateY(30px);
   opacity: 0;
+  transition: 0.4s;
 }
 
 .dog-card.show {
   transform: translateY(0);
   opacity: 1;
-}
-
-.dog-card:hover {
-  transform: scale(1.03);
 }
 
 .dog-card img {
@@ -109,20 +100,16 @@ nav a {
   color: #6f8efc;
 }
 
-/* FAVORITE */
 .fav-btn {
   cursor: pointer;
-  font-size: 18px;
   float: right;
 }
 
-/* DRAWING SECTION */
 .canvas-section {
   text-align: center;
   margin: 50px;
 }
 
-/* FOOTER */
 footer {
   background: #2d2d2d;
   color: #ddd;
@@ -147,7 +134,6 @@ footer {
 
 <div class="container">
 
-  <!-- SEARCH -->
   <div class="search-box">
     <input type="text" id="search" placeholder="Search dogs...">
   </div>
@@ -158,7 +144,7 @@ footer {
       <img src="images/buddy.jpg">
       <div class="info">
         <h3>Buddy <span class="fav-btn">🤍</span></h3>
-        <p>Friendly, playful, and loves children. Perfect family dog.</p>
+        <p>Friendly and playful.</p>
       </div>
     </div>
 
@@ -166,7 +152,7 @@ footer {
       <img src="images/luna.jpg">
       <div class="info">
         <h3>Luna <span class="fav-btn">🤍</span></h3>
-        <p>Calm, quiet, and ideal for apartment living.</p>
+        <p>Calm and quiet.</p>
       </div>
     </div>
 
@@ -174,7 +160,7 @@ footer {
       <img src="images/max.jpg">
       <div class="info">
         <h3>Max <span class="fav-btn">🤍</span></h3>
-        <p>Energetic and adventurous. Loves outdoor activities.</p>
+        <p>Energetic and fun.</p>
       </div>
     </div>
 
@@ -182,14 +168,14 @@ footer {
       <img src="images/misty.jpg">
       <div class="info">
         <h3>Misty <span class="fav-btn">🤍</span></h3>
-        <p>Cancer survivor with a gentle heart and lots of love.</p>
+        <p>Sweet and loving.</p>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- DRAWING CANVAS -->
+<!-- CANVAS -->
 <div class="canvas-section">
   <h2>Draw Your Favorite Dog 🐶</h2>
   <canvas id="drawingCanvas" width="500" height="300" style="border:1px solid black;"></canvas>
@@ -199,40 +185,10 @@ footer {
 
 <footer>
   <p><a href="index.html">← Back to Home</a></p>
-  <p>© 2026 Dog Shelter Adoption Center</p>
+  <p>© 2026 Dog Shelter</p>
 </footer>
 
 <script>
-// CANVAS DRAWING
-const canvas = document.getElementById("drawingCanvas");
-const ctx = canvas.getContext("2d");
-
-let drawing = false;
-
-canvas.addEventListener("mousedown", () => drawing = true);
-canvas.addEventListener("mouseup", () => {
-  drawing = false;
-  ctx.beginPath();
-});
-canvas.addEventListener("mousemove", draw);
-
-function draw(e) {
-  if (!drawing) return;
-
-  ctx.lineWidth = 3;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = "black";
-
-  ctx.lineTo(e.offsetX, e.offsetY);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(e.offsetX, e.offsetY);
-}
-
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
 // DARK MODE
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
@@ -241,11 +197,8 @@ function toggleDarkMode() {
 // SEARCH
 document.getElementById("search").addEventListener("keyup", function () {
   let value = this.value.toLowerCase();
-  let cards = document.querySelectorAll(".dog-card");
-
-  cards.forEach(card => {
-    let name = card.innerText.toLowerCase();
-    card.style.display = name.includes(value) ? "block" : "none";
+  document.querySelectorAll(".dog-card").forEach(card => {
+    card.style.display = card.innerText.toLowerCase().includes(value) ? "block" : "none";
   });
 });
 
@@ -257,21 +210,47 @@ document.querySelectorAll(".fav-btn").forEach(btn => {
 });
 
 // SCROLL ANIMATION
-const cards = document.querySelectorAll('.dog-card');
-
 function reveal() {
-  cards.forEach(card => {
+  document.querySelectorAll('.dog-card').forEach(card => {
     let top = card.getBoundingClientRect().top;
     if (top < window.innerHeight - 50) {
       card.classList.add("show");
     }
   });
 }
-
 window.addEventListener("scroll", reveal);
 window.addEventListener("load", reveal);
+
+// CANVAS (SAFE)
+const canvas = document.getElementById("drawingCanvas");
+
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+  let drawing = false;
+
+  canvas.addEventListener("mousedown", () => drawing = true);
+  canvas.addEventListener("mouseup", () => {
+    drawing = false;
+    ctx.beginPath();
+  });
+
+  canvas.addEventListener("mousemove", function(e) {
+    if (!drawing) return;
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  });
+
+  window.clearCanvas = function () {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+}
 </script>
 
 </body>
 </html>
+
 
